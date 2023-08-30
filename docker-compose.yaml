@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5050:5050
+    networks:
+      - network_project_scraping
+    depends_on:
+      - mysql_db
+      - cassandra_db
+      
+  nginx:
+    build:
+      context: ./f_nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - network_project_scraping
+    depends_on:
+      - web
+
+  mysql_db:
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecret
+      MYSQL_DATABASE: weather_data
+      MYSQL_USER: thomas
+      MYSQL_PASSWORD: supersecret
+    volumes:
+      - project_scraping_mysql:/var/lib/mysql
+    networks:
+      - network_project_scraping
+
+  cassandra_db:
+    hostname: cassandra_db  
+    build: ./cassandra
+    volumes:
+      - project_scraping_cassandra:/var/lib/cassandra/data 
+    networks:
+      - network_project_scraping
+    ports:
+      - "9042:9042"
+      - "7000:7000"
+      - "7199:7199"
+
+volumes:
+  project_scraping_mysql: 
+  project_scraping_cassandra:
+
+networks:
+  network_project_scraping:
+    driver: bridge
+
+
+

@@ -1,0 +1,60 @@
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+#wrapper {
+    background-color: #ffebcd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    height: 100vh; 
+    box-sizing: border-box; 
+
+}
+
+#bar {
+    text-align: center;
+    background-color: #017dab;
+    padding: 16px;
+    width: 100%;
+}
+
+#city, #reponse {
+    text-align: center;
+    margin: 10px 0;
+}
+
+button {
+    padding: 20px 180px;
+    font-size: 20px;
+    background-color: #24b1e4;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+#city input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#reponse, #reponse_data_ville {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #FFF9C4;
+    border: 1px solid #FFEB3B;
+    border-radius: 5px;
+    min-height: 50px;
+}

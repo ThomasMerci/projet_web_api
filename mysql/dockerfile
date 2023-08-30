@@ -1,0 +1,3 @@
+FROM mysql:latest
+ENV MYSQL_DATABASE weather_data
+COPY ./mysql_conf /docker-entrypoint-initdb.d/

@@ -1,0 +1,9 @@
+FROM cassandra:latest
+
+RUN mkdir -p /var/lib/cassandra/scripts
+
+COPY ./cql-scripts/ /var/lib/cassandra/scripts
+COPY cassandra.yaml /etc/cassandra/
+
+# ENTRYPOINT
+CMD ["sh", "-c", "cassandra -R && sleep 10 && cqlsh -f /var/lib/cassandra/scripts/webscraping.cql"]

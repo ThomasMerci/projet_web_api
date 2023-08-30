@@ -1,0 +1,10 @@
+Flask
+flask-cors
+pandas
+openai
+pymysql
+cryptography
+datetime
+mysql-connector-python
+cassandra-driver
+uuid
