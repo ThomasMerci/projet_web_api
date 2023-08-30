@@ -39,7 +39,7 @@ def model(prompt):
     print(reponse)
     return reponse
 """
-
+# création de l'article de presse
 def retour_texte(prompt, cle, dt):
     try:
         API_KEY = cle

@@ -1,6 +1,5 @@
 #py -3.11 -m pip install git+https://github.com/runpod/runpod-python.git
 #import runpod
-
 #from cassandra.cluster import Cluster
 #from cassandra.auth import PlainTextAuthProvider
 from flask import Blueprint
@@ -13,10 +12,12 @@ import mysql.connector
 
 api = Blueprint('api', __name__)
 
+#date et heure actuel
 now = datetime.now()
 date = now.strftime("%d-%m-%Y")
 heure = now.strftime("%H:%M:%S")
 
+#récupération des données dans mysql
 def mysql_data():
     try: 
         connection = mysql.connector.connect(host='mysql_db', user='root', password='supersecret', database='weather_data')
@@ -34,7 +35,7 @@ def mysql_data():
     except:
         return 'Pas de données disponible'
 
-
+#api de récupération et d'envoi des données pour le front-end
 @api.route('/message', methods=['GET', 'POST'])
 def meteo():
     data = request.json 
@@ -45,7 +46,7 @@ def meteo():
     cassandra_db_data(ville)
     dt = ville_fonct(ville)
     
-    reponse = retour_texte(f"Rédige un article détaillé comme un journaliste météo à la (date {date} et heure{heure}) dans la ville de {dt['city']}. "
+    reponse = retour_texte(f"Rédige un article détaillé comme un journaliste météorologique à la (date {date} et heure{heure}) dans la ville de {dt['city']}. "
     f"La température est actuellement de est de {dt['temp']}°C, avec un maximum de {dt['temp_max']}°C et un minimum de {dt['temp_min']}°C. "
     f"L'humidité est de {dt['humidity']}% avec une pression atmosphérique de {dt['pressure']} hPa. Le ciel est {dt['sky']} avec une couverture nuageuse de {dt['cloudiness']}%. "
     f"Le soleil s'est levé à {dt['sunrise']} et se couche à {dt['sunset']}. Le vent souffle à {dt['wind']} m/s en provenance de {dt['wind_deg']} degrés. Bonne jurnée à tous", cle, dt)

@@ -4,7 +4,10 @@ import json
 from datetime import datetime
 import json
 import mysql.connector
+from cassandra.cluster import Cluster
+import uuid
 
+#fonction pour récupérer la ville avec son pays, et l'id 
 def data_ville_fonct(ville):
     data_ville = [{'ville': 'Paris', 'pays': 'FR', 'ville_id': '2988507'},
                   {'ville': 'Bordeaux', 'pays': 'FR', 'ville_id': '5905868'},
@@ -23,7 +26,7 @@ def data_ville_fonct(ville):
     return 'Paris', 'FR', '2988507'
 
 
-
+#fonction pour récupérer les données grâce à l'api de http://api.openweathermap.org
 def url_builder(ville, pays, ville_id):
     user_api =  '58d1efb0943d1d89316df09425339d11'
     unit = 'metric'
@@ -47,7 +50,7 @@ def time_converter(time):
         return time
     
     
-
+#dictionnaire des données 
 def data_organizer(raw_api_dict):
     data= {'city': raw_api_dict.get('name'),
         'country': raw_api_dict.get('sys').get('country'),
@@ -66,7 +69,7 @@ def data_organizer(raw_api_dict):
     }
     return data
 
-#ville
+# gestion de la donnée
 def ville_fonct(ville):
     ville, pays, ville_id =data_ville_fonct(ville)
     full_api_url = url_builder(ville, pays, ville_id)
@@ -74,6 +77,7 @@ def ville_fonct(ville):
     df = data_organizer(data)
     return df
 
+#enregistrement des données dans mysql
 def mysql_db_data(ville):
     try :
         df = ville_fonct(ville)
@@ -99,26 +103,9 @@ def mysql_db_data(ville):
         connection.close()
     except:
         print("mysql ne marche pas")
+        
 
-
-
-def mysql_database():
-    connection = mysql.connector.connect(host='mysql_db', user='root', password='supersecret', database='weather_data')
-    cursor = connection.cursor()
-    cursor.execute("DROP TABLE IF EXISTS weather")
-    create_table_query = """CREATE TABLE weather (id INT AUTO_INCREMENT PRIMARY KEY, 
-        city VARCHAR(255),country VARCHAR(255), temp DECIMAL(5,2), temp_max DECIMAL(5,2),
-        temp_min DECIMAL(5,2), humidity INT, pressure INT,sky VARCHAR(255),sunrise TIME, 
-        sunset TIME,wind DECIMAL(5,2), wind_deg INT, dt TIME, cloudiness INT)"""
-    cursor.execute(create_table_query)
-    cursor.close()
-    connection.close()
-
-
-
-from cassandra.cluster import Cluster
-import uuid
-
+#enregistrement des données dans cassandra
 def cassandra_db_data(ville):
     try:
         df = ville_fonct(ville)
