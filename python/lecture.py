@@ -43,7 +43,7 @@ def meteo():
     cle = data.get('cle')
 
     mysql_db_data(ville)
-    cassandra_db_data(ville)
+    #cassandra_db_data(ville)
     dt = ville_fonct(ville)
     
     reponse = retour_texte(f"Rédige un article détaillé comme un journaliste météorologique à la (date {date} et heure{heure}) dans la ville de {dt['city']}. "
