@@ -5,11 +5,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f4f4f4;
+    background-color: #efeded;
 }
 
 #wrapper {
-    background-color: #ffebcd;
+    background-color: #f5ebd8;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
@@ -17,20 +17,20 @@ body {
     max-width: 600px;
     text-align: center;
     height: 100vh; 
-    box-sizing: border-box; 
-
-}
+    box-sizing: border-box; }
 
 #bar {
     text-align: center;
-    background-color: #017dab;
+    background-color: #088dbd;
     padding: 16px;
     width: 100%;
+    font-size: 34px;
 }
-
+    
 #city, #reponse {
     text-align: center;
     margin: 10px 0;
+    font-size: 20px;
 }
 
 button {
@@ -53,7 +53,7 @@ button {
 #reponse, #reponse_data_ville {
     margin: 20px 0;
     padding: 15px;
-    background-color: #FFF9C4;
+    background-color: #ece9c3;
     border: 1px solid #FFEB3B;
     border-radius: 5px;
     min-height: 50px;
