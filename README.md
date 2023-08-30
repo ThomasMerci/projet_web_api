@@ -21,5 +21,5 @@ Une fois les données récupérées, elles sont stockées dans Cassandra et MySQ
 
 Après avoir enregistré les informations, je les transmets à l'api d'OpenAI pour les transformer en un article de presse. Au début, j'avais opté pour le modèle Llama 2 pour effectuer cette transformation en presse. toutefois, le coût en GPU est assez élevé.
 
-Après récupération de l'article, les données sont envoyées en api au font-end, le JS met en forme les données pour la page en html.
+Après récupération de l'article, les données sont envoyées en api au font-end, le JS mets en forme les données pour la page html.
 
